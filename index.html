@@ -2,119 +2,176 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=\, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>메인 홈페이지</title>
-<style>
+    <style>
+        /* 핑크, 보라, 파란색의 세련된 조합 그라데이션 배경 */
         body {
-            font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
-            background-color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Noto Sans KR', sans-serif;
+            background: linear-gradient(135deg, #fae8ff 0%, #f3e8ff 50%, #e0f2fe 100%);
+            background-attachment: fixed;
             margin: 0;
-            padding: 40px 20px;
+            padding: 80px 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
+            color: #334155;
+            -webkit-font-smoothing: antialiased;
         }
 
+        /* 메인 타이틀 */
         h1 {
-            font-size: 32px;
-            font-weight: bold;
-            margin-bottom: 40px;
-            color: #000000;
+            font-size: 38px;
+            font-weight: 800;
+            margin-bottom: 56px;
+            color: #1e1b4b; /* 깊은 네이비 퍼플 톤으로 가독성 확보 */
+            letter-spacing: -1px;
+            text-shadow: 0 2px 8px rgba(255, 255, 255, 0.4);
         }
 
-        /* 3x3 그리드 레이아웃 설정 */
+        /* 3x3 반응형 격자 레이아웃 */
         .grid-container {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
+            gap: 28px;
             width: 100%;
-            max-width: 1000px;
+            max-width: 1100px;
         }
 
-        /* 카드 기본 스타일 (클릭 가능하도록 a 태그로 구현) */
+        /* 배경 색상과 부드럽게 섞이는 반투명 글래스모피즘 카드 */
         .card {
-            background-color: #ffffff;
-            border: 1px solid #e0e0e0;
-            border-radius: 12px;
-            padding: 30px 20px;
+            background-color: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(12px); /* 배경을 부드럽게 흐리는 효과 */
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 20px;
+            padding: 40px 28px;
             text-align: center;
-            text-decoration: none; /* 링크 밑줄 제거 */
-            color: #000000;
+            text-decoration: none;
+            color: inherit;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            min-height: 120px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
-            transition: all 0.25s ease-in-out; /* 부드러운 전환 효과 */
+            min-height: 150px;
+            box-shadow: 
+                0 4px 10px -1px rgba(76, 29, 149, 0.03), 
+                0 10px 20px -3px rgba(76, 29, 149, 0.04);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-sizing: border-box;
         }
 
-        /* 타이틀 스타일 */
+        /* 카드 타이틀 */
         .card h2 {
-            font-size: 18px;
-            font-weight: bold;
-            margin: 0 0 8px 0;
-            line-height: 1.4;
+            font-size: 19px;
+            font-weight: 700;
+            color: #1e293b;
+            margin: 0 0 20px 0;
+            line-height: 1.5;
+            letter-spacing: -0.3px;
+            word-break: keep-all;
         }
 
-        /* '클릭하세요~' 텍스트 스타일 */
+        /* 깔끔한 뱃지 스타일의 버튼 */
         .card p {
-            font-size: 14px;
-            color: #666666;
+            font-size: 13px;
+            font-weight: 600;
+            color: #4c1d95; /* 은은한 보라빛 서브 컬러 */
             margin: 0;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 8px 20px;
+            border-radius: 30px;
+            border: 1px solid rgba(233, 213, 252, 0.6);
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
         }
 
-        /* ★ 마우스 포인트가 올라갔을 때(Hover) 효과 ★ */
+        /* 마우스 오버 시 효과 */
         .card:hover {
-            background-color: #f8f9fa; /* 연한 회색 배경 */
-            border-color: #a0a0a0;     /* 테두리 진하게 */
-            transform: translateY(-4px); /* 살짝 위로 떠오르는 효과 */
-            box-shadow: 0 6px 12px rgba(0,0,0,0.1); /* 그림자 강조 */
+            border-color: rgba(168, 85, 247, 0.4); /* 보라빛 경계선 */
+            background-color: rgba(255, 255, 255, 0.9);
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 
+                0 20px 30px -5px rgba(76, 29, 149, 0.08), 
+                0 10px 15px -5px rgba(76, 29, 149, 0.04);
+        }
+
+        /* 마우스 오버 시 뱃지 스타일 변화 */
+        .card:hover p {
+            background-color: #4c1d95; /* 딥 퍼플 색상으로 반전 */
+            color: #ffffff;
+            border-color: #4c1d95;
+            box-shadow: 0 4px 12px rgba(76, 29, 149, 0.2);
+        }
+
+        /* 반응형 모바일 최적화 */
+        @media (max-width: 900px) {
+            .grid-container {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+        }
+        @media (max-width: 550px) {
+            body {
+                padding: 50px 16px;
+            }
+            h1 {
+                font-size: 30px;
+                margin-bottom: 40px;
+            }
+            .grid-container {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
         }
     </style>
 </head>
 <body>
-<h1>1-1반 실습</h1>
+
+    <h1>1-1반 실습</h1>
 
     <div class="grid-container">
         <a href="https://vr.yuhan.ac.kr/index.do" class="card" target="_blank">
             <h2>유한대학교 컴퓨터공학과<br>게임콘텐츠전공</h2>
-            <p>클릭하세요~</p>
+            <p>바로가기 <span>→</span></p>
         </a>
         <a href="flex.html" class="card">
             <h2>길강현의 홈페이지</h2>
-            <p>클릭하세요~</p>
+            <p>바로가기 <span>→</span></p>
         </a>
         <a href="zindex.html" class="card">
             <h2>z-index 실습</h2>
-            <p>클릭하세요~</p>
+            <p>바로가기 <span>→</span></p>
         </a>
 
         <a href="boxtestcater" class="card" target="_blank">
             <h2>flex 캐릭터 박스</h2>
-            <p>클릭하세요~</p>
+            <p>바로가기 <span>→</span></p>
         </a>
         <a href="https://www.tmon.co.kr/" class="card" target="_blank">
             <h2>티몬 홈페이지</h2>
-            <p>클릭하세요~</p>
+            <p>바로가기 <span>→</span></p>
         </a>
         <a href="https://www.tmon.co.kr/" class="card" target="_blank">
             <h2>티몬 홈페이지</h2>
-            <p>클릭하세요~</p>
+            <p>바로가기 <span>→</span></p>
         </a>
 
         <a href="https://www.tmon.co.kr/" class="card" target="_blank">
             <h2>티몬 홈페이지</h2>
-            <p>클릭하세요~</p>
+            <p>바로가기 <span>→</span></p>
         </a>
         <a href="https://www.tmon.co.kr/" class="card" target="_blank">
             <h2>티몬 홈페이지</h2>
-            <p>클릭하세요~</p>
+            <p>바로가기 <span>→</span></p>
         </a>
         <a href="https://www.tmon.co.kr/" class="card" target="_blank">
             <h2>티몬 홈페이지</h2>
-            <p>클릭하세요~</p>
+            <p>바로가기 <span>→</span></p>
         </a>
     </div>
+
 </body>
 </html>
